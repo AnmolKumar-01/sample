@@ -1,0 +1,75 @@
+// Printing the Pascal Triangle using the Combination mathematical method 
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+// function to find the factorial
+
+int factorial(int n){
+    int facorial=1;
+    
+    for(int i=n;i>1;i--){
+        facorial*=i;
+    }
+    return facorial;
+}
+
+// function to find nCr (combination)
+
+int combination(int n , int r){
+    int deno=factorial(r)*factorial(n-r);
+    int numer=factorial(n);
+    
+    int comb = numer/deno;
+    return comb;
+}
+
+// function to Print pascal Triangle 
+
+vector<vector<int>> pascalTriangle(int &n){
+    vector<vector<int>> pascal(n);
+
+    // creating the vectors in each row of size (i+1)
+
+    for(int i=0;i<n;i++){
+        pascal[i].resize(i+1);
+
+        // assigning the values in the elements of each row
+
+        for(int j=0;j<=i;j++){
+            pascal[i][j]=combination(i,j);
+        }
+    }
+    return pascal;
+}
+
+int main(){
+    cout<<"Enter a number: ";
+    int n;
+    cin>>n;
+
+    vector<vector<int>> ans;
+
+    ans=pascalTriangle(n);
+
+    for(int i=0;i<n;i++){
+
+        // code for printing the spaces 
+
+        for(int j=0;j<=n-i;j++){
+            cout<<" ";
+        }
+
+        // code for printing the pascal triangle digits
+        
+        for(int j=0;j<=i;j++){
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+
+    
+    
+    return 0;
+}
